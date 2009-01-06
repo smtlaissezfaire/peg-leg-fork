@@ -14,8 +14,6 @@
 # appreciated but is not required.
 # 
 # THE SOFTWARE IS PROVIDED 'AS IS'.  USE ENTIRELY AT YOUR OWN RISK.
-# 
-# Last edited: 2007-09-13 08:12:17 by piumarta on emilia.local
 
 %{
 # include "tree.h"

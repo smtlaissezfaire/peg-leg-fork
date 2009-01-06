@@ -12,8 +12,6 @@
  * appreciated but is not required.
  * 
  * THE SOFTWARE IS PROVIDED 'AS IS'.  USE ENTIRELY AT YOUR OWN RISK.
- * 
- * Last edited: 2007-09-12 00:27:30 by piumarta on vps2.piumarta.com
  */
 
 #include "tree.h"

@@ -12,8 +12,6 @@
  * appreciated but is not required.
  * 
  * THE SOFTWARE IS PROVIDED 'AS IS'.  USE ENTIRELY AT YOUR OWN RISK.
- * 
- * Last edited: 2007-08-31 13:55:23 by piumarta on emilia.local
  */
 
 #include <stdio.h>
