@@ -17,10 +17,8 @@
 # Hierarchical syntax
 
 Grammar   <- Spacing Definition+ EndOfFile
-
 Definition  <- DefinitionIdentifier LEFTARROW DefinitionExpression &{ YYACCEPT }
-Expression  <- Sequence (SLASH Sequence { Node *f= pop();  push(Alternate_append(pop(), f)); }
-          )*
+Expression  <- Sequence (SLASH ExpressionSequence)*
 Sequence  <- Prefix (Prefix   { Node *f= pop();  push(Sequence_append(pop(), f)); } #ikp expanded from 'Seq <- Prefix*'
         )*
      /        { push(makePredicate("1")); }       #ikp added
@@ -51,6 +49,10 @@ DefinitionIdentifier <- Identifier {
 
 DefinitionExpression <- Expression {
   Node *e= pop();  Rule_setExpression(pop(), e);
+}
+
+ExpressionSequence <- Sequence {
+  Node *f= pop();  push(Alternate_append(pop(), f));
 }
 
 
