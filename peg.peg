@@ -18,8 +18,7 @@
 
 Grammar   <- Spacing Definition+ EndOfFile
 
-Definition  <- Identifier       { if (push(beginRule(findRule(yytext)))->rule.expression) fprintf(stderr, "rule '%s' redefined\n", yytext); }
-         LEFTARROW Expression { Node *e= pop();  Rule_setExpression(pop(), e); } &{ YYACCEPT }
+Definition  <- DefinitionIdentifier LEFTARROW DefinitionExpression &{ YYACCEPT }
 Expression  <- Sequence (SLASH Sequence { Node *f= pop();  push(Alternate_append(pop(), f)); }
           )*
 Sequence  <- Prefix (Prefix   { Node *f= pop();  push(Sequence_append(pop(), f)); } #ikp expanded from 'Seq <- Prefix*'
@@ -41,6 +40,19 @@ Primary   <- Identifier !LEFTARROW  { push(makeName(findRule(yytext))); }
      / Action     { push(makeAction(yytext)); }   #ikp added
      / BEGIN      { push(makePredicate("YY_BEGIN")); }  #ikp added
      / END        { push(makePredicate("YY_END")); }  #ikp added
+
+
+# Conveniences until there are named expression blocks
+
+DefinitionIdentifier <- Identifier {
+  if (push(beginRule(findRule(yytext)))->rule.expression)
+    fprintf(stderr, "rule '%s' redefined\n", yytext);
+}
+
+DefinitionExpression <- Expression {
+  Node *e= pop();  Rule_setExpression(pop(), e);
+}
+
 
 # Lexical syntax
 
