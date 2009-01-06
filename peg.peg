@@ -22,8 +22,8 @@ Expression  <- Sequence (SLASH ExpressionSequence)*
 Sequence    <- Prefix (SequencePrefix)*    #ikp expanded from 'Seq <- Prefix*'
              /  { push(makePredicate("1")); }       #ikp added
 Prefix      <-  AND Action     { push(makePredicate(yytext)); }  #ikp added
-             / AND Suffix     { push(makePeekFor(pop())); }     #ikp expanded from 'Prefix <- (AND/NOT)? Suffix'
-             / NOT Suffix     { push(makePeekNot(pop())); }
+             / AND Suffix      { push(makePeekFor(pop())); }     #ikp expanded from 'Prefix <- (AND/NOT)? Suffix'
+             / NOT Suffix      { push(makePeekNot(pop())); }
              /     Suffix
 Suffix      <- Primary
                (
